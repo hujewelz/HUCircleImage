@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.author             = { "Jewelz Hu" => "hujewelz@163.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/hujewelz/HUCircleImage.git", :tag => "0.0.1" }
-  s.source_files  = "HUCircleImage/source","HUCircleImage/source/**/*.{h,m}"
+  s.source_files  = "HUCircleImage/source/**/*.{h,m}"
   s.framework  = "UIKit"
 
   
