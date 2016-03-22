@@ -19,12 +19,16 @@
     self.image = [self.image circleImageWithsize:self.frame.size radius:radius borderWidth:0 borderColor:nil];
 }
 
-- (void)hu_setImageWithUrl:(NSURL *)imageUrl CornerRadius:(CGFloat)radius {
+- (void)hu_setImageWithUrl:(NSURL *)imageUrl cornerRadius:(CGFloat)radius {
     
-    [self hu_setImageWithUrl:imageUrl CornerRadius:radius completed:nil];
+    [self hu_setImageWithUrl:imageUrl cornerRadius:radius completed:nil];
 }
 
-- (void)hu_setImageWithUrl:(NSURL *)imageUrl CornerRadius:(CGFloat)radius completed:(void(^)(UIImage *))completed {
+- (void)hu_setImageWithUrl:(NSURL *)imageUrl cornerRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor {
+    [self hu_setImageWithUrl:imageUrl cornerRadius:radius borderWidth:borderWidth borderColor:borderColor completed:nil];
+}
+
+- (void)hu_setImageWithUrl:(NSURL *)imageUrl cornerRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor completed:(void (^)(UIImage *))completed {
     
     [HUWebImageDownloader downloadImageWithURL:imageUrl option:HUWebImageOptionNone completed:^(UIImage *image, NSError *error, NSURL *imageUrl) {
         if (!image) {
@@ -35,8 +39,8 @@
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *circleimage = [image circleImageWithsize:self.frame.size radius:radius borderWidth:0 borderColor:nil];
-           // [[SDImageCache sharedImageCache] storeImage:circleimage forKey:imageURL.absoluteString toDisk:YES];
+            UIImage *circleimage = [image circleImageWithsize:self.frame.size radius:radius borderWidth:borderWidth borderColor:borderColor];
+            // [[SDImageCache sharedImageCache] storeImage:circleimage forKey:imageURL.absoluteString toDisk:YES];
             [[HUWebImageDownloader sharedInstance] saveImage:circleimage forKey:imageUrl.absoluteString toDisk:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.image = circleimage;
@@ -48,7 +52,37 @@
             
         });
     }];
+    
+    
 
+}
+
+- (void)hu_setImageWithUrl:(NSURL *)imageUrl cornerRadius:(CGFloat)radius completed:(void(^)(UIImage *))completed {
+    
+    [self hu_setImageWithUrl:imageUrl cornerRadius:radius borderWidth:0 borderColor:nil completed:completed];
+//    [HUWebImageDownloader downloadImageWithURL:imageUrl option:HUWebImageOptionNone completed:^(UIImage *image, NSError *error, NSURL *imageUrl) {
+//        if (!image) {
+//            if (completed) {
+//                completed(image);
+//            }
+//            return ;
+//        }
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            UIImage *circleimage = [image circleImageWithsize:self.frame.size radius:radius borderWidth:0 borderColor:nil];
+//           // [[SDImageCache sharedImageCache] storeImage:circleimage forKey:imageURL.absoluteString toDisk:YES];
+//            [[HUWebImageDownloader sharedInstance] saveImage:circleimage forKey:imageUrl.absoluteString toDisk:YES];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.image = circleimage;
+//                if (completed) {
+//                    completed(circleimage);
+//                }
+//            });
+//            
+//            
+//        });
+//    }];
+//
 
 
 //    NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:imageUrl];

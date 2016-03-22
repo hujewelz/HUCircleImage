@@ -65,7 +65,6 @@
     NSURLSessionDataTask *task = [session dataTaskWithRequest:repuest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         NSArray *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"data: %@", result);
         for (NSDictionary *dict in result) {
             NSString *linkurl = dict[@"linkurl"];
             
