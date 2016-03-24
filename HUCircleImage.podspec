@@ -9,14 +9,14 @@
 Pod::Spec.new do |s|
 
   s.name         = "HUCircleImage"
-  s.version      = "0.0.1"
-  s.summary      = "circle image ."
+  s.version      = "0.0.2"
+  s.summary      = "圆角图片处理，支持网络图"
   s.homepage     = "https://github.com/hujewelz"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
   s.license      = "MIT"
   s.author             = { "Jewelz Hu" => "hujewelz@163.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/hujewelz/HUCircleImage.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/hujewelz/HUCircleImage.git", :tag => "0.0.2" }
   s.source_files  = "HUCircleImage/source/**/*.{h,m}"
   s.framework  = "UIKit"
 
